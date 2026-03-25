@@ -1,0 +1,12 @@
+# Mengaktifkan rewrite engine
+RewriteEngine On
+RewriteBase /
+
+# Izinkan akses ke halaman maintenance itu sendiri (agar tidak redirect loop)
+RewriteCond %{REQUEST_URI} !/maintenance.html$ [NC]
+
+# Izinkan akses ke file gambar/CSS/JS (opsional, agar halaman maintenance tampil sempurna)
+RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|gif|css|js|ico)$ [NC]
+
+# Redirect semua pengunjung ke halaman maintenance
+RewriteRule ^(.*)$ /maintenance.html [R=302,L]
